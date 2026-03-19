@@ -1,0 +1,5 @@
+{
+  "name": "Trippr",
+  "description": "The Living Cartography — a private social map for your Inner Circle.",
+  "requestFramePermissions": ["camera"]
+}

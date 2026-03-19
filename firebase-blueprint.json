@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user profile in the memory tapestry.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "The unique Firebase Auth UID." },
+        "displayName": { "type": "string", "description": "The user's public name." },
+        "email": { "type": "string", "format": "email", "description": "The user's email address." },
+        "photoURL": { "type": "string", "format": "uri", "description": "The user's avatar image URL." },
+        "bio": { "type": "string", "description": "A short bio for the user." }
+      },
+      "required": ["uid", "displayName", "email"]
+    },
+    "Postcard": {
+      "title": "Postcard",
+      "description": "A memory pinned to the tapestry.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The unique ID of the postcard." },
+        "authorId": { "type": "string", "description": "The UID of the user who created the postcard." },
+        "locationName": { "type": "string", "description": "The name of the location (e.g., 'Paris, France')." },
+        "latitude": { "type": "number", "description": "The latitude coordinate." },
+        "longitude": { "type": "number", "description": "The longitude coordinate." },
+        "coverImageUrl": { "type": "string", "format": "uri", "description": "The main image for the postcard." },
+        "content": { "type": "string", "description": "The text content of the memory." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the postcard was created." },
+        "taggedUserIds": { "type": "array", "items": { "type": "string" }, "description": "List of UIDs for tagged friends." },
+        "rotation": { "type": "number", "description": "The visual rotation of the postcard on the tapestry." },
+        "x": { "type": "number", "description": "The X coordinate on the tapestry canvas." },
+        "y": { "type": "number", "description": "The Y coordinate on the tapestry canvas." }
+      },
+      "required": ["id", "authorId", "locationName", "latitude", "longitude", "coverImageUrl", "createdAt"]
+    },
+    "Friendship": {
+      "title": "Friendship",
+      "description": "A connection between two users.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The unique ID of the friendship record." },
+        "user1Id": { "type": "string", "description": "The UID of the first user." },
+        "user2Id": { "type": "string", "description": "The UID of the second user." },
+        "status": { "type": "string", "enum": ["pending", "accepted"], "description": "The status of the friendship." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the friendship was initiated." }
+      },
+      "required": ["id", "user1Id", "user2Id", "status", "createdAt"]
+    },
+    "Reaction": {
+      "title": "Reaction",
+      "description": "A user's reaction to a postcard.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "The unique ID of the reaction." },
+        "postcardId": { "type": "string", "description": "The ID of the postcard being reacted to." },
+        "userId": { "type": "string", "description": "The UID of the user who reacted." },
+        "type": { "type": "string", "enum": ["heart", "star", "smile"], "description": "The type of reaction." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the reaction was added." }
+      },
+      "required": ["id", "postcardId", "userId", "type", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "User profile documents." },
+    "/postcards/{id}": { "schema": "Postcard", "description": "Postcard documents." },
+    "/friendships/{id}": { "schema": "Friendship", "description": "Friendship relationship documents." },
+    "/reactions/{id}": { "schema": "Reaction", "description": "Reaction documents for postcards." }
+  }
+}
