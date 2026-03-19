@@ -22,30 +22,15 @@ body {
 }
 
 .glass {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-dark {
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-}
-
-.btn-pill {
-  @apply rounded-full px-6 py-2.5 text-sm font-bold tracking-tight transition-all active:scale-95;
-}
-
-.btn-primary {
-  @apply bg-emerald-500 text-[#0d1410] hover:bg-emerald-400 shadow-lg shadow-emerald-500/10;
-}
-
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  @apply text-white hover:bg-white/5;
 }
 
 .postmark {

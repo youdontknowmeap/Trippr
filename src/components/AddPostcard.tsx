@@ -120,15 +120,12 @@ export const AddPostcard = ({ onClose }: AddPostcardProps) => {
       <motion.div
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
-        className="glass-dark border border-white/5 w-full max-w-lg rounded-[32px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+        className="bg-zinc-900 border border-white/10 w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
       >
-        <div className="p-8 border-b border-white/5 flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-display font-bold text-white tracking-tight">Pin a Memory</h2>
-            <p className="text-zinc-500 text-[10px] uppercase tracking-widest mt-1">Share a moment from your journey</p>
-          </div>
-          <button onClick={onClose} className="p-2.5 hover:bg-white/5 rounded-full text-zinc-400 transition-colors">
-            <X size={20} />
+        <div className="p-6 border-b border-white/5 flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-white tracking-tight">Pin a New Memory</h2>
+          <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-full text-zinc-400 transition-colors">
+            <X size={24} />
           </button>
         </div>
 
@@ -176,29 +173,29 @@ export const AddPostcard = ({ onClose }: AddPostcardProps) => {
           </div>
 
           {/* Location & Content */}
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-[10px] font-bold text-emerald-500/70 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
-                <MapPin size={12} /> Location
+              <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-2">
+                <MapPin size={14} /> Location Name
               </label>
               <input 
                 required
                 value={locationName}
                 onChange={(e) => setLocationName(e.target.value)}
                 placeholder="Where was this?"
-                className="w-full bg-white/2 border border-white/5 rounded-2xl px-5 py-3.5 text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/30 transition-colors"
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors"
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[10px] font-bold text-emerald-500/70 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
-                <Users size={12} /> Inner Circle
+              <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-2">
+                <Users size={14} /> Tag Friends
               </label>
               <div className="relative">
                 <input 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search friends..."
-                  className="w-full bg-white/2 border border-white/5 rounded-2xl px-5 py-3.5 text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/30 transition-colors"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors"
                 />
                 <AnimatePresence>
                   {searchResults.length > 0 && (
@@ -206,7 +203,7 @@ export const AddPostcard = ({ onClose }: AddPostcardProps) => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
-                      className="absolute top-full left-0 right-0 mt-2 glass-dark border border-white/5 rounded-2xl shadow-2xl z-50 max-h-48 overflow-y-auto p-1.5"
+                      className="absolute top-full left-0 right-0 mt-2 bg-zinc-800 border border-white/10 rounded-xl shadow-2xl z-50 max-h-48 overflow-y-auto p-2"
                     >
                       {searchResults.map(u => (
                         <button
@@ -219,10 +216,10 @@ export const AddPostcard = ({ onClose }: AddPostcardProps) => {
                             setSearchQuery('');
                             setSearchResults([]);
                           }}
-                          className="w-full flex items-center gap-2.5 p-2 hover:bg-white/5 rounded-xl transition-colors"
+                          className="w-full flex items-center gap-3 p-2 hover:bg-white/5 rounded-lg transition-colors"
                         >
-                          <img src={u.photoURL} className="w-6 h-6 rounded-full" alt="" />
-                          <span className="text-white text-xs font-bold">{u.displayName}</span>
+                          <img src={u.photoURL} className="w-8 h-8 rounded-full" alt="" />
+                          <span className="text-white text-sm">{u.displayName}</span>
                         </button>
                       ))}
                     </motion.div>
@@ -231,10 +228,10 @@ export const AddPostcard = ({ onClose }: AddPostcardProps) => {
               </div>
               <div className="flex flex-wrap gap-2 pt-2">
                 {taggedUsers.map(u => (
-                  <div key={u.id} className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full">
-                    <span className="text-[10px] text-emerald-400 font-bold">{u.displayName}</span>
+                  <div key={u.id} className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+                    <span className="text-xs text-emerald-400 font-bold">{u.displayName}</span>
                     <button type="button" onClick={() => setTaggedUsers(taggedUsers.filter(tu => tu.id !== u.id))}>
-                      <X size={10} className="text-emerald-400" />
+                      <X size={12} className="text-emerald-400" />
                     </button>
                   </div>
                 ))}
@@ -243,25 +240,25 @@ export const AddPostcard = ({ onClose }: AddPostcardProps) => {
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-emerald-500/70 uppercase tracking-[0.2em] ml-1">The Story</label>
+            <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">The Story</label>
             <textarea 
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Tell the story behind this memory..."
               rows={4}
-              className="w-full bg-white/2 border border-white/5 rounded-2xl px-5 py-3.5 text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/30 transition-colors resize-none"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors resize-none"
             />
           </div>
         </form>
 
-        <div className="p-8 border-t border-white/5">
+        <div className="p-8 bg-black/20 border-t border-white/5">
           <button
             onClick={handleSubmit}
             disabled={loading || !imageFile || !locationName}
-            className="w-full btn-pill btn-primary py-4 flex items-center justify-center gap-2.5 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-emerald-500 disabled:bg-zinc-700 disabled:text-zinc-500 hover:bg-emerald-400 text-[#0f1a14] font-bold py-4 px-6 rounded-2xl flex items-center justify-center gap-3 transition-all active:scale-95 shadow-lg shadow-emerald-500/20"
           >
-            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-            <span className="text-sm font-bold">{loading ? 'Pinning Memory...' : 'Pin to Tapestry'}</span>
+            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
+            {loading ? 'Pinning Memory...' : 'Pin to Tapestry'}
           </button>
         </div>
       </motion.div>

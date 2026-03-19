@@ -70,10 +70,10 @@ const AppContent = () => {
           
           <button
             onClick={() => signIn()}
-            className="w-full btn-pill btn-primary py-4 group"
+            className="w-full bg-emerald-500 hover:bg-emerald-400 text-[#0d1410] font-bold py-5 px-8 rounded-2xl flex items-center justify-center gap-3 transition-all active:scale-95 shadow-xl shadow-emerald-500/30 group"
           >
-            <LogIn className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            <span className="text-base">Enter the Tapestry</span>
+            <LogIn className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+            <span className="text-lg">Enter the Tapestry</span>
           </button>
           
           <div className="mt-10 flex items-center justify-center gap-6 opacity-30">
@@ -94,9 +94,9 @@ const AppContent = () => {
       
       {/* Top Navigation / User Profile */}
       <div className="fixed top-8 left-8 right-8 flex items-center justify-between z-40 pointer-events-none">
-        <div className="glass px-5 py-2.5 rounded-full flex items-center gap-2.5 pointer-events-auto">
-          <Compass className="w-4 h-4 text-emerald-400" />
-          <span className="font-display font-bold tracking-tight text-base">Trippr</span>
+        <div className="glass px-6 py-3 rounded-2xl flex items-center gap-3 pointer-events-auto">
+          <Compass className="w-5 h-5 text-emerald-400" />
+          <span className="font-display font-bold tracking-tight text-lg">Trippr</span>
         </div>
 
         <div className="relative pointer-events-auto">
@@ -104,12 +104,12 @@ const AppContent = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="w-10 h-10 rounded-full glass overflow-hidden border border-white/10 hover:border-emerald-500/30 transition-colors"
+            className="w-12 h-12 rounded-2xl glass overflow-hidden border border-white/10 hover:border-emerald-500/30 transition-colors"
           >
             {user.photoURL ? (
               <img src={user.photoURL} className="w-full h-full object-cover" alt="" />
             ) : (
-              <UserIcon className="w-full h-full p-2.5 text-zinc-400" />
+              <UserIcon className="w-full h-full p-3 text-zinc-400" />
             )}
           </motion.button>
 
@@ -119,18 +119,18 @@ const AppContent = () => {
                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                className="absolute top-full right-0 mt-3 w-56 glass-dark rounded-2xl shadow-2xl overflow-hidden p-1.5"
+                className="absolute top-full right-0 mt-4 w-64 glass-dark rounded-3xl shadow-2xl overflow-hidden p-2"
               >
-                <div className="p-3 border-b border-white/5">
-                  <p className="text-xs font-bold text-white truncate">{user.displayName}</p>
-                  <p className="text-[10px] text-zinc-500 truncate">{user.email}</p>
+                <div className="p-4 border-b border-white/5">
+                  <p className="text-sm font-bold text-white truncate">{user.displayName}</p>
+                  <p className="text-xs text-zinc-500 truncate">{user.email}</p>
                 </div>
                 <button
                   onClick={() => signOut()}
-                  className="w-full flex items-center gap-2.5 p-3 hover:bg-rose-500/10 text-rose-400 transition-colors rounded-xl"
+                  className="w-full flex items-center gap-3 p-4 hover:bg-rose-500/10 text-rose-400 transition-colors rounded-2xl"
                 >
-                  <LogIn className="w-3.5 h-3.5 rotate-180" />
-                  <span className="text-xs font-bold">Sign Out</span>
+                  <LogIn className="w-4 h-4 rotate-180" />
+                  <span className="text-sm font-bold">Sign Out</span>
                 </button>
               </motion.div>
             )}
@@ -157,32 +157,32 @@ const AppContent = () => {
 
       {/* Navigation Dock */}
       <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-40">
-        <div className="glass-dark p-1.5 rounded-full flex items-center gap-1.5 shadow-2xl border border-white/5">
+        <div className="glass-dark p-2 rounded-[32px] flex items-center gap-2 shadow-2xl border border-white/10">
           <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.03)' }}
+            whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.05)' }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsViewingFriends(true)}
-            className={`p-3.5 rounded-full transition-colors ${isViewingFriends ? 'text-emerald-400 bg-white/5' : 'text-zinc-400'}`}
+            className={`p-4 rounded-2xl transition-colors ${isViewingFriends ? 'text-emerald-400 bg-white/5' : 'text-zinc-400'}`}
           >
-            <Users className="w-5 h-5" />
+            <Users className="w-6 h-6" />
           </motion.button>
           
           <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
+            whileHover={{ scale: 1.05, y: -4 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsAddingPostcard(true)}
-            className="btn-pill btn-primary flex items-center gap-2 py-3.5"
+            className="bg-emerald-500 text-[#0d1410] px-8 py-4 rounded-[24px] shadow-xl shadow-emerald-500/20 flex items-center gap-3 font-bold text-lg"
           >
-            <Plus className="w-5 h-5" />
+            <Plus className="w-6 h-6" />
             <span>Pin Memory</span>
           </motion.button>
 
           <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.03)' }}
+            whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.05)' }}
             whileTap={{ scale: 0.95 }}
-            className="p-3.5 rounded-full text-rose-400 transition-colors"
+            className="p-4 rounded-2xl text-rose-400 transition-colors"
           >
-            <Heart className="w-5 h-5" />
+            <Heart className="w-6 h-6" />
           </motion.button>
         </div>
       </div>

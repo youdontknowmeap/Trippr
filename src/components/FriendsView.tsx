@@ -105,15 +105,12 @@ export const FriendsView = ({ onClose }: FriendsViewProps) => {
       <motion.div
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
-        className="glass-dark border border-white/5 w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl flex flex-col max-h-[80vh]"
+        className="bg-zinc-900 border border-white/10 w-full max-w-md rounded-3xl overflow-hidden shadow-2xl flex flex-col max-h-[80vh]"
       >
         <div className="p-6 border-b border-white/5 flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-display font-bold text-white tracking-tight">Connections</h2>
-            <p className="text-zinc-500 text-[10px] uppercase tracking-widest mt-0.5">Your inner circle</p>
-          </div>
+          <h2 className="text-2xl font-bold text-white tracking-tight">Friends</h2>
           <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-full text-zinc-400 transition-colors">
-            <X size={20} />
+            <X size={24} />
           </button>
         </div>
 
@@ -125,14 +122,14 @@ export const FriendsView = ({ onClose }: FriendsViewProps) => {
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && searchUsers()}
               placeholder="Search by name..."
-              className="w-full bg-white/2 border border-white/5 rounded-full px-5 py-3 pl-11 text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/30 transition-colors text-sm"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 pl-12 text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/50 transition-colors"
             />
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={16} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" size={20} />
             <button 
               onClick={searchUsers}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-emerald-500 text-[#0d1410] px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-emerald-400 transition-all"
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-emerald-500/20 transition-all"
             >
-              Find
+              Search
             </button>
           </div>
 
@@ -147,30 +144,30 @@ export const FriendsView = ({ onClose }: FriendsViewProps) => {
                 {searchResults.map(u => {
                   const f = getFriendshipStatus(u.id);
                   return (
-                    <div key={u.id} className="flex items-center justify-between p-3 bg-white/2 rounded-2xl border border-white/5">
+                    <div key={u.id} className="flex items-center justify-between p-3 bg-white/5 rounded-2xl border border-white/5">
                       <div className="flex items-center gap-3">
-                        <img src={u.photoURL} className="w-9 h-9 rounded-full" alt="" />
-                        <span className="text-white text-sm font-bold">{u.displayName}</span>
+                        <img src={u.photoURL} className="w-10 h-10 rounded-full" alt="" />
+                        <span className="text-white font-medium">{u.displayName}</span>
                       </div>
                       {f ? (
                         f.status === 'pending' ? (
                           f.user2Id === user?.uid ? (
-                            <button onClick={() => acceptFriend(f.id)} className="p-2 bg-emerald-500 text-[#0f1a14] rounded-full">
-                              <Check size={16} />
+                            <button onClick={() => acceptFriend(f.id)} className="p-2 bg-emerald-500 text-[#0f1a14] rounded-xl">
+                              <Check size={18} />
                             </button>
                           ) : (
                             <div className="p-2 text-zinc-500">
-                              <Clock size={16} />
+                              <Clock size={18} />
                             </div>
                           )
                         ) : (
-                          <button onClick={() => removeFriend(f.id)} className="p-2 text-rose-400 hover:bg-rose-500/10 rounded-full transition-all">
-                            <UserMinus size={16} />
+                          <button onClick={() => removeFriend(f.id)} className="p-2 text-rose-400 hover:bg-rose-500/10 rounded-xl transition-all">
+                            <UserMinus size={18} />
                           </button>
                         )
                       ) : (
-                        <button onClick={() => addFriend(u.id)} className="p-2 bg-white/5 text-emerald-400 hover:bg-emerald-500/10 rounded-full transition-all">
-                          <UserPlus size={16} />
+                        <button onClick={() => addFriend(u.id)} className="p-2 bg-white/5 text-emerald-400 hover:bg-emerald-500/10 rounded-xl transition-all">
+                          <UserPlus size={18} />
                         </button>
                       )}
                     </div>
@@ -210,24 +207,24 @@ const FriendItem: React.FC<{ friendship: any, onAccept: (id: string) => Promise<
   if (!friend) return null;
 
   return (
-    <div className="flex items-center justify-between p-3 bg-white/2 rounded-2xl border border-white/5">
+    <div className="flex items-center justify-between p-3 bg-white/5 rounded-2xl border border-white/5">
       <div className="flex items-center gap-3">
-        <img src={friend.photoURL} className="w-9 h-9 rounded-full" alt="" />
+        <img src={friend.photoURL} className="w-10 h-10 rounded-full" alt="" />
         <div>
-          <p className="text-white text-sm font-bold">{friend.displayName}</p>
-          <p className="text-[9px] text-zinc-500 uppercase tracking-widest font-bold">
+          <p className="text-white font-medium">{friend.displayName}</p>
+          <p className="text-[10px] text-zinc-500 uppercase tracking-widest">
             {friendship.status === 'pending' ? 'Pending Request' : 'Connected'}
           </p>
         </div>
       </div>
       <div className="flex items-center gap-2">
         {friendship.status === 'pending' && friendship.user2Id === user?.uid && (
-          <button onClick={() => onAccept(friendship.id)} className="p-2 bg-emerald-500 text-[#0f1a14] rounded-full shadow-lg shadow-emerald-500/20">
-            <Check size={16} />
+          <button onClick={() => onAccept(friendship.id)} className="p-2 bg-emerald-500 text-[#0f1a14] rounded-xl shadow-lg shadow-emerald-500/20">
+            <Check size={18} />
           </button>
         )}
-        <button onClick={() => onRemove(friendship.id)} className="p-2 text-rose-400 hover:bg-rose-500/10 rounded-full transition-all">
-          <UserMinus size={16} />
+        <button onClick={() => onRemove(friendship.id)} className="p-2 text-rose-400 hover:bg-rose-500/10 rounded-xl transition-all">
+          <UserMinus size={18} />
         </button>
       </div>
     </div>
